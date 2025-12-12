@@ -3,10 +3,10 @@
 # Objective:        Reading PDF
 
 # Creator:          Tamara Munoz Ojeda
-# Last Editor:      Tamara Munoz Ojeda
+# Last Editor:      Tianyu Zheng
 
 # Created:          06/11/2024
-# Last Modified:    17/08/2025
+# Last Modified:    05/12/2025
 # ------------------------------------- # 
 
 # ------------------------------------- # 
@@ -16,11 +16,15 @@ import fitz
 import re
 import os
 from openai import OpenAI
+import dropbox
 from dotenv import load_dotenv
 
 # Importing repositories of own functions
+
+from dbx_functions import (
+    list_dropbox_files)
+
 from pdf_utilities import (
-    construct_pdf_paths,
     extract_text_from_pdf,
     clean_pdf_text)
 
@@ -28,33 +32,19 @@ from openai_functions import (
     apply_gpt4,
     apply_gpt4mini)
 
-# ------------------------------------- #
-# Obtaining current working directory
-current_path = os.getcwd()
-
-# Defining path based on detected users
-if '/Volumes/Crucial X9/' in current_path: # for server
-    dropbox = '/Volumes/Crucial X9/tamaramunoz/ConsiliumBots Dropbox/Tamara Muñoz/CCAS 2022/CCAS 2024/Data/'
-    desktop = '/Users/tamaramunoz/Documents/ConsiliumBots/CCAS/'
-    pdf_path = os.path.join(dropbox, 'Inputs/Paper pdfs/')
-else: # for local user
-    dropbox = '/Users/tamaramunoz/ConsiliumBots Dropbox/Tamara Muñoz/CCAS 2022/CCAS 2024/Data/'
-    desktop = '/Users/tamaramunoz/Desktop/ConsiliumBots/CCAS/'
-    pdf_path = os.path.join(dropbox, 'Inputs/Paper pdfs/')
-
-print(pdf_path)
 
 # ------------------------------------- #
 # Importing OpenAI API key
-key_path = os.path.join(current_path, '.env')
-load_dotenv(key_path)
-OPENAI_API_KEY = os.getenv("API_KEY")
-client = OpenAI(api_key = OPENAI_API_KEY)
+
+load_dotenv()
+
+client = OpenAI(api_key = os.getenv("API_KEY"))
+dbx = dropbox.Dropbox(os.getenv("DROPBOX_ACCESS_TOKEN"))
 
 # ------------------------------------- #
-# Importing and creating df
-df_path = os.path.join(dropbox, 'Inputs/ccas_papers.xlsx')
-df = construct_pdf_paths(df_path, pdf_path)
+# Importing and creating dataframe with pdf paths from Dropbox
+df = list_dropbox_files(dbx, "/CCAS 2022/CCAS 2024/Data/Inputs/Paper pdfs")
+df = df[df["type"] == ".pdf"].reset_index(drop=True).sample(20)
 
 # Adding new columns to dataframe for outputs of processing pdfs
 df = df.assign(
@@ -92,7 +82,10 @@ I am analyzing papers related to Centralized Coordinated Assignment Systems (CCA
 for index, row in df.iterrows():
     try:
         # Extract and clean PDF text
-        pdf_text = extract_text_from_pdf(row['pdf'])
+        metadata, response = dbx.files_download(row['path'])
+        pdf_document = fitz.open(stream=response.content, filetype="pdf")
+        pdf_text = extract_text_from_pdf(pdf_document)
+
         if not pdf_text:
             print(f"No text extracted for index {index}. Skipping.")
             continue
@@ -153,7 +146,15 @@ for index, row in df.iterrows():
         print(f"Error processing index {index}: {e}")
 
 
+print(df.head())
+
+df.to_excel("~/Downloads/batch20_output.xlsx", index = False, engine = 'openpyxl')
+
+
+
 # Saving the DataFrame
+'''
 output_path = os.path.join(dropbox, 'Intermediate/batch10.xlsx')
 df.to_excel(output_path, index = False, engine = 'openpyxl')
 print(f"Data saved to {output_path}")
+'''
