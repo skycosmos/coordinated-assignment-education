@@ -1,0 +1,15 @@
+.*
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.env/
+
+# Interim Dataset Files
+deep_research/ccas_city_*.csv
+deep_research/db_process.sql
+
+!.github/
