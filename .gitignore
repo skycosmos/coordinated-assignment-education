@@ -8,7 +8,7 @@ __pycache__/
 venv/
 .env/
 
-# Interim Dataset Files
+# Interim dataset files
 deep_research/ccas_city_*.csv
 deep_research/db_process.sql
 
