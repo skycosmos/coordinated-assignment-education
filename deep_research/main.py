@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from collections import deque
 from prompt_gen import prompt_gen
 
-load_dotenv()
+load_dotenv("../.env")  # Load environment variables from .env file
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 DB_PATH = "ccas_city.db"

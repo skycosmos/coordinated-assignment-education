@@ -1,0 +1,216 @@
+[
+  {
+    "paper_name": "abdulkadiroglu2005boston.pdf",
+    "analysis_result": {
+      "paper_metadata": {
+        "title": "The Boston Public School Match",
+        "year": "Unknown",
+        "authors": "Abdulkadiroğlu, Atila, Pathak, Parag A., Roth, Alvin E., Sönmez, Tayfun",
+        "summary": "This paper examines the Boston Public Schools (BPS) student assignment system, highlighting its challenges and potential improvements. The current mechanism, implemented in 1999, requires students entering grades K, 1, 6, and 9 to rank at least three schools in order of preference. The system prioritizes younger siblings attending the same school as older siblings, students from the school's walk zone, and uses random numbers for additional prioritization. The paper discusses the strategic difficulties parents face, as ranking a preferred school first can be risky if the student is not admitted, potentially losing spots in other preferred schools. The authors describe the Boston mechanism as a priority matching system, similar to those used in other U.S. cities and historically in the UK for medical internships. The paper also explores alternative mechanisms like deferred-acceptance algorithms, which could mitigate the strategic risks inherent in the current system. The study was prompted by a request from BPS for advice on redesigning their assignment mechanism, following a history of desegregation efforts and the elimination of racial preferences in 1999.",
+        "relevance": "3"
+      },
+      "ccas_systems": [
+        {
+          "region": "Boston, Massachusetts",
+          "iso3_country_code": "USA",
+          "education_level": "Primary",
+          "ccas_status": "Coordinated",
+          "participating_institutions": "Public",
+          "preference_list_length": "3",
+          "priority_criteria": [
+            "sibling",
+            "zone",
+            "random"
+          ],
+          "assignment_mechanism": "Immediate Acceptance",
+          "adoption_year": "1999",
+          "reform_year": "2004",
+          "notes": "The Boston Public Schools system uses a priority matching mechanism where students rank schools, and assignments are made based on priorities like sibling attendance and walk zones. The system has faced criticism for encouraging strategic behavior in school ranking."
+        },
+        {
+          "region": "Boston, Massachusetts",
+          "iso3_country_code": "USA",
+          "education_level": "Secondary",
+          "ccas_status": "Coordinated",
+          "participating_institutions": "Public",
+          "preference_list_length": "3",
+          "priority_criteria": [
+            "sibling",
+            "zone",
+            "random"
+          ],
+          "assignment_mechanism": "Immediate Acceptance",
+          "adoption_year": "1999",
+          "reform_year": "2004",
+          "notes": "Similar to primary education, the secondary school assignment in Boston uses a priority mechanism. High school admissions are city-wide with some schools requiring special admissions."
+        }
+      ]
+    },
+    "error": null
+  },
+  {
+    "paper_name": "abdulkadiroglu2006changing.pdf",
+    "analysis_result": {
+      "paper_metadata": {
+        "title": "Changing the Boston School Choice Mechanism",
+        "year": "2006",
+        "authors": "Abdulkadiroğlu, Atila, Pathak, Parag A., Roth, Alvin E., Sönmez, Tayfun",
+        "summary": "This paper discusses the decision by the Boston School Committee to replace the existing Boston school choice mechanism with a deferred acceptance mechanism in 2005. The authors present empirical evidence against the previous Boston mechanism, which was a priority matching mechanism, and argue for the adoption of a strategy-proof mechanism. The paper highlights the strategic behavior of parents under the old system, where some parents were able to manipulate their preferences to gain better school placements, while others were disadvantaged by not doing so. The authors argue that the deferred acceptance mechanism is fairer and eliminates the need for strategic behavior, thus leading to more efficient and equitable student assignments. The paper also compares the deferred acceptance mechanism with the top trading cycles mechanism, ultimately supporting the former for its simplicity and effectiveness in addressing the issues identified with the Boston mechanism.",
+        "relevance": "3"
+      },
+      "ccas_systems": [
+        {
+          "region": "Boston, Massachusetts",
+          "iso3_country_code": "USA",
+          "education_level": "Unknown",
+          "ccas_status": "Coordinated",
+          "participating_institutions": "Public",
+          "preference_list_length": "Unknown",
+          "priority_criteria": [
+            "Unknown"
+          ],
+          "assignment_mechanism": "Deferred Acceptance",
+          "adoption_year": "2005",
+          "reform_year": "2005",
+          "notes": "The Boston school choice system was reformed in 2005 to use a deferred acceptance mechanism, replacing the previous priority matching mechanism. This change aimed to eliminate strategic manipulation by parents and improve fairness and efficiency in school assignments."
+        }
+      ]
+    },
+    "error": null
+  },
+  {
+    "paper_name": "akbarpour2022centralized.pdf",
+    "analysis_result": {
+      "paper_metadata": {
+        "title": "Centralized School Choice with Unequal Outside Options",
+        "year": "2022",
+        "authors": "Akbarpour, Mohammad, Kapor, Adam, Neilson, Christopher, van Dijk, Winnie, Zimmerman, Seth",
+        "summary": "This paper examines how market design choices in school choice systems can exacerbate or mitigate pre-existing inequalities among participants, particularly focusing on the role of outside options. The authors introduce outside options into a school choice model and demonstrate that students with outside options prefer manipulable mechanisms over strategy-proof ones. The paper empirically tests this theory using the transition from the Boston mechanism to the Deferred Acceptance mechanism in New Haven, Connecticut, in 2019. The study finds that under the Boston mechanism, students with outside options are more likely to list popular schools, a gap that disappears with the Deferred Acceptance mechanism. The findings suggest that strategy-proof mechanisms can reduce inequalities by not giving an advantage to students with better outside options.",
+        "relevance": "3"
+      },
+      "ccas_systems": [
+        {
+          "region": "New Haven, Connecticut",
+          "iso3_country_code": "USA",
+          "education_level": "Primary",
+          "ccas_status": "Coordinated",
+          "participating_institutions": "Public",
+          "preference_list_length": "Unknown",
+          "priority_criteria": [
+            "Unknown"
+          ],
+          "assignment_mechanism": "Deferred Acceptance",
+          "adoption_year": "2019",
+          "reform_year": "2019",
+          "notes": "The New Haven school district transitioned from the Boston mechanism to the Deferred Acceptance mechanism in 2019. This change aimed to address inequalities arising from students having different outside options, such as guaranteed spots in neighborhood schools or private school alternatives."
+        }
+      ]
+    },
+    "error": null
+  },
+  {
+    "paper_name": "akyol2017.pdf",
+    "analysis_result": {
+      "paper_metadata": {
+        "title": "Preferences, Selection, and Value Added: A Structural Approach",
+        "year": "2016",
+        "authors": "Akyol, Şaziye Pelin; Krishna, Kala",
+        "summary": "This paper investigates the factors influencing students' preferences for high schools and the extent to which these schools contribute to students' academic success. The authors develop a structural model to estimate students' preferences and the average valuation placed on each school, controlling for endogeneity using creative instruments. The study finds that school valuation is significantly influenced by the school's location, selectivity (measured by cutoff scores), value added, and past performance in university entrance exams. However, cutoff scores have a much larger impact on school valuation than value added. The research focuses on the Turkish education system, where admissions to elite exam schools are based on competitive national exams. The study uses data on all high schools in Turkey that admit students based on these exams, including admission cutoff scores, number of seats, and mean performance in university entrance exams. The authors estimate a nested logit model of preferences over high schools, considering that exam schools admit only the highest-scoring applicants. The paper contributes to understanding how students value different school characteristics and the role of selection versus value-added in educational outcomes.",
+        "relevance": "2"
+      },
+      "ccas_systems": [
+        {
+          "region": "Turkey",
+          "iso3_country_code": "TUR",
+          "education_level": "Secondary",
+          "ccas_status": "Coordinated",
+          "participating_institutions": "Public",
+          "preference_list_length": "Unknown",
+          "priority_criteria": [
+            "academic"
+          ],
+          "assignment_mechanism": "Unknown",
+          "adoption_year": "Unknown",
+          "reform_year": "Unknown",
+          "notes": "The Turkish secondary education system uses a centralized exam-driven admission process for elite exam schools. Admission is based on performance in national competitive exams, and schools are ranked by selectivity and performance in university entrance exams."
+        }
+      ]
+    },
+    "error": null
+  },
+  {
+    "paper_name": "altmejd2021brother.pdf",
+    "analysis_result": {
+      "paper_metadata": {
+        "title": "O Brother, Where Start Thou? Sibling Spillovers on College and Major Choice in Four Countries",
+        "year": "2021",
+        "authors": "Altmejd, Adam; Barrios-Fernández, Andrés; Drlje, Marin; Goodman, Joshua; Hurwitz, Michael; Kovac, Dejan; Mulhern, Christine; Neilson, Christopher; Smith, Jonathan",
+        "summary": "This paper investigates the influence of older siblings on the college and major choices of younger siblings across four countries: Chile, Croatia, Sweden, and the United States. Using administrative data and a regression discontinuity design, the study examines how college-specific admissions thresholds affecting older siblings impact the educational decisions of younger siblings. The findings reveal that younger siblings are significantly more likely to follow their older siblings to the same college or college-major combination, with spillover effects disappearing if the older sibling drops out. The study highlights the role of family and social networks in shaping higher education trajectories and suggests that interventions to improve college access may have multiplier effects.",
+        "relevance": "2"
+      },
+      "ccas_systems": [
+        {
+          "region": "Chile",
+          "iso3_country_code": "CHL",
+          "education_level": "Tertiary",
+          "ccas_status": "Coordinated",
+          "participating_institutions": "Unknown",
+          "preference_list_length": "Unknown",
+          "priority_criteria": [
+            "academic"
+          ],
+          "assignment_mechanism": "Unknown",
+          "adoption_year": "Unknown",
+          "reform_year": "Unknown",
+          "notes": "Chile uses a centralized application system that allocates students to a unique college-major combination based on academic performance and ranked preferences."
+        },
+        {
+          "region": "Croatia",
+          "iso3_country_code": "HRV",
+          "education_level": "Tertiary",
+          "ccas_status": "Coordinated",
+          "participating_institutions": "Unknown",
+          "preference_list_length": "Unknown",
+          "priority_criteria": [
+            "academic"
+          ],
+          "assignment_mechanism": "Unknown",
+          "adoption_year": "Unknown",
+          "reform_year": "Unknown",
+          "notes": "Croatia employs a centralized application system similar to Chile, coordinating admissions through a single admission offer based on academic performance and preferences."
+        },
+        {
+          "region": "Sweden",
+          "iso3_country_code": "SWE",
+          "education_level": "Tertiary",
+          "ccas_status": "Coordinated",
+          "participating_institutions": "Unknown",
+          "preference_list_length": "Unknown",
+          "priority_criteria": [
+            "academic"
+          ],
+          "assignment_mechanism": "Unknown",
+          "adoption_year": "Unknown",
+          "reform_year": "Unknown",
+          "notes": "Sweden's system is coordinated, providing a single admission offer based on academic performance and ranked preferences, similar to Chile and Croatia."
+        },
+        {
+          "region": "United States",
+          "iso3_country_code": "USA",
+          "education_level": "Tertiary",
+          "ccas_status": "Uncoordinated",
+          "participating_institutions": "Unknown",
+          "preference_list_length": "Unknown",
+          "priority_criteria": [
+            "Unknown"
+          ],
+          "assignment_mechanism": "Unknown",
+          "adoption_year": "Unknown",
+          "reform_year": "Unknown",
+          "notes": "In the United States, admissions are decentralized, with students potentially receiving multiple offers. Some colleges use SAT score cutoffs in their admission process."
+        }
+      ]
+    },
+    "error": null
+  }
+]

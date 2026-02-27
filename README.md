@@ -1,8 +1,5 @@
-# CCAS
-Review of centralized admission and student assignment systems worldwide.
-
 ## Project purpose
-This repository gathers and processes data on Coordinated Choice and Assignment Systems (CCAS) for cities worldwide. The code in `deep_research` submits background research jobs to an OpenAI Responses model, polls for JSON outputs, and stores structured CCAS metadata in a SQLite database.
+This repository gathers and processes data on Coordinated Choice and Assignment Systems (CCAS) for cities worldwide. The code in `deep_research` submits background deep research jobs to an OpenAI Responses model, polls for JSON outputs, and stores structured CCAS metadata in a SQLite database.
 
 ## Key files
 - `deep_research/main.py`: main runner — submits background jobs, polls results, and updates the `ccas_city` table in `ccas_city.db`.
@@ -47,5 +44,3 @@ sqlite3 ccas_city.db < db_process.sql
 ## Notes
 - `main.py` expects the OpenAI Responses client to be configured via `OPENAI_API_KEY` in the environment.
 - Back up `ccas_city.db` before testing or bulk runs.
-
-If you want, I can populate `ccas_city.db`, run a test, or add a short CONTRIBUTING section.

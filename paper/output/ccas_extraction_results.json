@@ -1,0 +1,171 @@
+[
+  {
+    "paper_name": "abdulkadiroglu2005boston.pdf",
+    "ccas_result": [
+      {
+        "region": "Boston",
+        "iso3_country_code": "USA",
+        "education_level": "primary",
+        "ccas_status": "Coordinated",
+        "participating_institutions": "Public",
+        "preference_list_length": 3,
+        "priority_criteria": [
+          "sibling",
+          "zone",
+          "Unknown"
+        ],
+        "assignment_mechanism": "Immediate Acceptance",
+        "adoption_year": 1999,
+        "reform_year": 2004,
+        "notes": "Boston Public Schools operate a coordinated system where students rank at least three schools. The assignment mechanism prioritizes siblings and walk-zone students, with random numbers determining order within priority classes. The system has undergone reforms, including changes to wait-list management."
+      },
+      {
+        "region": "Boston",
+        "iso3_country_code": "USA",
+        "education_level": "secondary",
+        "ccas_status": "Coordinated",
+        "participating_institutions": "Public",
+        "preference_list_length": 3,
+        "priority_criteria": [
+          "sibling",
+          "zone",
+          "Unknown"
+        ],
+        "assignment_mechanism": "Immediate Acceptance",
+        "adoption_year": 1999,
+        "reform_year": 2004,
+        "notes": "The secondary education assignment in Boston follows the same coordinated system as primary education, with students ranking schools and being assigned based on priorities. The mechanism aims to balance demand and available seats while considering sibling and zone preferences."
+      }
+    ],
+    "error": null
+  },
+  {
+    "paper_name": "abdulkadiroglu2006changing.pdf",
+    "ccas_result": [
+      {
+        "region": "Boston",
+        "iso3_country_code": "USA",
+        "education_level": "secondary",
+        "ccas_status": "Coordinated",
+        "participating_institutions": "Public",
+        "preference_list_length": "Unknown",
+        "priority_criteria": [
+          "Unknown"
+        ],
+        "assignment_mechanism": "Deferred Acceptance",
+        "adoption_year": 2005,
+        "reform_year": 2005,
+        "notes": "The Boston Public Schools adopted a deferred acceptance mechanism in July 2005 to replace the previous priority matching mechanism. This change aimed to simplify strategic choices for parents and reduce the incentives to game the system. The paper discusses the transition and the rationale behind adopting a strategy-proof mechanism."
+      }
+    ],
+    "error": null
+  },
+  {
+    "paper_name": "akbarpour2022centralized.pdf",
+    "ccas_result": [
+      {
+        "region": "New Haven, Connecticut",
+        "iso3_country_code": "USA",
+        "education_level": "primary",
+        "ccas_status": "Coordinated",
+        "participating_institutions": "Public",
+        "preference_list_length": "Unknown",
+        "priority_criteria": [
+          "Unknown"
+        ],
+        "assignment_mechanism": "Deferred Acceptance",
+        "adoption_year": 2019,
+        "reform_year": 2019,
+        "notes": "New Haven transitioned from a manipulable Boston mechanism to a Deferred Acceptance mechanism in 2019. The study highlights how access to outside options influences school choice behavior and outcomes."
+      }
+    ],
+    "error": null
+  },
+  {
+    "paper_name": "akyol2017.pdf",
+    "ccas_result": [
+      {
+        "region": "Turkey",
+        "iso3_country_code": "TUR",
+        "education_level": "secondary",
+        "ccas_status": "Coordinated",
+        "participating_institutions": "Public",
+        "preference_list_length": "Unknown",
+        "priority_criteria": [
+          "academic"
+        ],
+        "assignment_mechanism": "Unknown",
+        "adoption_year": "Unknown",
+        "reform_year": "Unknown",
+        "notes": "Turkey's admissions system for high schools is exam-driven, with admissions based on performance in competitive national exams. This suggests a coordinated system, but specific details about preference list length, assignment mechanisms, and reform years are not provided."
+      }
+    ],
+    "error": null
+  },
+  {
+    "paper_name": "altmejd2021brother.pdf",
+    "ccas_result": [
+      {
+        "region": "Chile",
+        "iso3_country_code": "CHL",
+        "education_level": "tertiary",
+        "ccas_status": "Coordinated",
+        "participating_institutions": "Public",
+        "preference_list_length": "Unknown",
+        "priority_criteria": [
+          "academic"
+        ],
+        "assignment_mechanism": "Unknown",
+        "adoption_year": "Unknown",
+        "reform_year": "Unknown",
+        "notes": "Chile operates a centralized application system for college admissions, providing students with a single admission offer based on their preferences and academic performance."
+      },
+      {
+        "region": "Croatia",
+        "iso3_country_code": "HRV",
+        "education_level": "tertiary",
+        "ccas_status": "Coordinated",
+        "participating_institutions": "Public",
+        "preference_list_length": "Unknown",
+        "priority_criteria": [
+          "academic"
+        ],
+        "assignment_mechanism": "Unknown",
+        "adoption_year": "Unknown",
+        "reform_year": "Unknown",
+        "notes": "Croatia has a centralized admissions system that allocates students to colleges based on their ranked preferences and academic performance."
+      },
+      {
+        "region": "Sweden",
+        "iso3_country_code": "SWE",
+        "education_level": "tertiary",
+        "ccas_status": "Coordinated",
+        "participating_institutions": "Public",
+        "preference_list_length": "Unknown",
+        "priority_criteria": [
+          "academic"
+        ],
+        "assignment_mechanism": "Unknown",
+        "adoption_year": "Unknown",
+        "reform_year": "Unknown",
+        "notes": "Sweden utilizes a centralized application system for higher education that provides a single admission offer based on applicants' preferences and academic records."
+      },
+      {
+        "region": "United States",
+        "iso3_country_code": "USA",
+        "education_level": "tertiary",
+        "ccas_status": "Uncoordinated",
+        "participating_institutions": "Unknown",
+        "preference_list_length": "Unknown",
+        "priority_criteria": [
+          "Unknown"
+        ],
+        "assignment_mechanism": "Unknown",
+        "adoption_year": "Unknown",
+        "reform_year": "Unknown",
+        "notes": "The United States has a decentralized admission system where students may receive offers from multiple colleges, lacking a coordinated centralized assignment system."
+      }
+    ],
+    "error": null
+  }
+]

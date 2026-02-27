@@ -1,5 +1,0 @@
-dotenv
-pandas
-numpy
-python-dotenv
-openai

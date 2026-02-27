@@ -1,0 +1,10 @@
+paper_name,region,iso3_country_code,education_level,ccas_status,assignment_mechanism,adoption_year
+abdulkadiroglu2005boston.pdf,Boston,USA,primary,Coordinated,Immediate Acceptance,1999
+abdulkadiroglu2005boston.pdf,Boston,USA,secondary,Coordinated,Immediate Acceptance,1999
+abdulkadiroglu2006changing.pdf,Boston,USA,secondary,Coordinated,Deferred Acceptance,2005
+akbarpour2022centralized.pdf,"New Haven, Connecticut",USA,primary,Coordinated,Deferred Acceptance,2019
+akyol2017.pdf,Turkey,TUR,secondary,Coordinated,Unknown,Unknown
+altmejd2021brother.pdf,Chile,CHL,tertiary,Coordinated,Unknown,Unknown
+altmejd2021brother.pdf,Croatia,HRV,tertiary,Coordinated,Unknown,Unknown
+altmejd2021brother.pdf,Sweden,SWE,tertiary,Coordinated,Unknown,Unknown
+altmejd2021brother.pdf,United States,USA,tertiary,Uncoordinated,Unknown,Unknown
