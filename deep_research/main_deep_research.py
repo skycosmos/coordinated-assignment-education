@@ -12,7 +12,7 @@ from prompt_gen import prompt_gen
 load_dotenv("../.env")  # Load environment variables from .env file
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-DB_PATH = "ccas_city.db"
+DB_PATH = "output/ccas_city.db"
 MAX_BATCH_SIZE = 500
 JOB_TIMEOUT_MINUTES = 20
 POLL_INTERVAL = 1  # seconds
