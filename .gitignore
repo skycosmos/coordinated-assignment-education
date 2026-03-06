@@ -6,10 +6,9 @@ __pycache__/
 
 # Virtual environments
 venv/
-.env/
 
-# Interim dataset files
-deep_research/ccas_city_*.csv
-deep_research/db_process.sql
+# data set files
+output/
+input/
 
 !.github/

@@ -9,18 +9,15 @@
 # Last Modified:    17/08/2025
 # -------------------------------------- # 
 
-# The object of this file is to define functions that call different OpenAI models. They are fairly standard code and specify the model, message, roles, output, and creativity of each model. They are the following:  
-# 'apply_gpt4': calls the gpt-4o model 
-# 'apply_gpt4mini': calls the gpt-4o mini model 
-# 'apply_gpt5mini': calls the gpt-5 mini model 
+# The object of this file is to define functions that call different OpenAI models. They are fairly standard code and specify the model, message, roles, output, and creativity of each model.
 
 # Importing necessary packages
 from openai import OpenAI
-from prompt_gen import generate_ccas_extraction_prompt
+from prompt_gen import prompt_gen_pdf_extract
 
 
 # -------------------------------------- #
-def extract_ccas_from_paper(client, paper_text, model="gpt-4o", temp=0.2):
+def read_paper(client, paper_text, model="gpt-4o", temp=0.2):
     """
     Extract CCAS (Coordinated Choice and Assignment System) information from academic paper text.
     
@@ -40,7 +37,7 @@ def extract_ccas_from_paper(client, paper_text, model="gpt-4o", temp=0.2):
     """
     try:
         # Generate CCAS extraction prompt from prompt_gen module
-        prompt = generate_ccas_extraction_prompt()
+        prompt = prompt_gen_pdf_extract()
         
         # Setting up the OpenAI message format
         messages = [

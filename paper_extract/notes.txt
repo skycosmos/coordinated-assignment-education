@@ -19,8 +19,8 @@ Extract the following basic information from the paper:
 
 1. **Title**: Title of the paper
 2. **Year**: Year of publication (4-digit number or "Unknown")
-3. **Authors**: List of authors in "Last Name, First Name" format, separated by commas, or "Unknown" if not available
-4. **Summary**: Comprehensive summary of main contributions and findings (max 400 words), or "Unknown" if not available
+3. **Authors**: List of authors in "Last Name, First Name" format, separated by commas
+4. **Summary**: Comprehensive summary of main contributions and findings (max 400 words)
 5. **Relevance**: Relevance score (provide ONLY the number):
    - 3 = Highly Related (main focus on coordinated choice and assignment systems)
    - 2 = Moderately Related (describes systems but not main focus)
@@ -78,7 +78,6 @@ Return valid JSON (no markdown or commentary) with this structure:
 ### CRITICAL RULES
 
 1. **Multiple education levels**: If the paper discusses multiple levels for the same region, return separate objects in ccas_systems array
-2. **Multiple regions**: If the paper discusses multiple regions, return separate objects in ccas_systems array
 2. **CCAS Cascade Rule**: If ccas_status is "Uncoordinated" or "Unknown", set these to "Unknown": participating_institutions, preference_list_length, priority_criteria, assignment_mechanism, adoption_year, reform_year. Only notes should explain.
 3. **No fabrication**: Use "Unknown" if information is not found. Do NOT invent facts.
 4. **Priority Criteria**: Return as array. Include all criteria mentioned. Return ["Unknown"] if none mentioned.
@@ -109,19 +108,6 @@ Return valid JSON (no markdown or commentary) with this structure:
             "adoption_year": 1999,
             "reform_year": 2005,
             "notes": "Boston uses the Boston Mechanism where students rank schools..."
-        }
-        {
-            "region": "Beijing",
-            "iso3_country_code": "CHN",
-            "education_level": "Primary",
-            "ccas_status": "Coordinated",
-            "participating_institutions": "Both",
-            "preference_list_length": "Unknown",
-            "priority_criteria": ["Unknown"],
-            "assignment_mechanism": "Serial Dictatorship",
-            "adoption_year": "Unknown",
-            "reform_year": "Unknown",
-            "notes": "Beijing uses the Serial Dictatorship where students are ordered by lottery and then assigned to their highest-ranked school..."
         }
     ]
 }

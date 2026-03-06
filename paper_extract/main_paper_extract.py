@@ -10,9 +10,10 @@ import pandas as pd
 import dropbox
 from dotenv import load_dotenv
 from openai import OpenAI
-from pdf_utilities import extract_text_from_pdf, clean_pdf_text
-from openai_functions import apply_gpt4
-from prompt_gen import generate_combined_paper_analysis_prompt
+
+from pdf_func import pdf2text
+from openai_funct import read_paper
+from prompt_gen import prompt_gen_pdf_extract
 import fitz
 
 # Load environment variables
@@ -98,7 +99,7 @@ def test_combined_analysis(papers):
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     
     # Get combined prompt
-    prompt = generate_combined_paper_analysis_prompt()
+    prompt = prompt_gen_pdf_extract()
     
     analysis_results = []
     
@@ -116,10 +117,10 @@ def test_combined_analysis(papers):
         
         try:
             # Run combined analysis
-            result = apply_gpt4(
+            result = read_paper(
                 client=client,
-                text=paper['text_sample'],
-                prompt=prompt,
+                paper_text=paper['text_sample'],
+                model="gpt-4o",
                 temp=0.2
             )
             
