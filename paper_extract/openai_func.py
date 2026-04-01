@@ -56,4 +56,4 @@ def read_paper(client, paper_text, model="gpt-4o", temp=0.2):
         return response.choices[0].message.content
     except Exception as e:
         print(f"Error when extracting CCAS from paper with {model}: {e}")
-        return '{"error": "Failed to extract CCAS information", "details": "' + str(e) + '"}')   
+        return '{"error": "Failed to extract CCAS information", "details": "' + str(e) + '"}'

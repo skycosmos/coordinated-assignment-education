@@ -4,3 +4,6 @@ numpy
 python-dotenv
 openai
 dropbox
+requests
+scikit-learn
+supabase

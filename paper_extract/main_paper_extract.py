@@ -10,21 +10,20 @@ import pandas as pd
 import dropbox
 from dotenv import load_dotenv
 from openai import OpenAI
+import fitz
 
 from pdf_func import pdf2text
-from openai_funct import read_paper
-from prompt_gen import prompt_gen_pdf_extract
-import fitz
+from openai_func import read_paper
 
 # Load environment variables
 load_dotenv()
 
-def download_and_extract_papers(num_papers=5):
+def download_and_extract_papers(num_papers=None):
     """
     Download papers from Dropbox and extract text from first num_papers.
     
     Args:
-        num_papers (int): Number of papers to test
+        num_papers (int | None): Number of papers to process. None means all.
     
     Returns:
         list: List of dicts with paper info and extracted text
@@ -36,8 +35,10 @@ def download_and_extract_papers(num_papers=5):
     paper_list_path = "output/paper_list.csv"
     df_papers = pd.read_csv(paper_list_path)
     
-    # Get first num_papers
-    papers_to_test = df_papers.head(num_papers)
+    # Keep only PDFs and optionally limit to first num_papers
+    df_papers = df_papers[df_papers["type"] == ".pdf"].copy()
+    papers_to_test = df_papers if num_papers is None else df_papers.head(num_papers)
+    total_papers = len(papers_to_test)
     
     results = []
     
@@ -45,7 +46,7 @@ def download_and_extract_papers(num_papers=5):
         paper_name = row['name']
         paper_path = row['path']
         
-        print(f"[{idx+1}/{num_papers}] Processing: {paper_name}")
+        print(f"[{idx+1}/{total_papers}] Processing: {paper_name}")
         
         try:
             # Download PDF from Dropbox to memory
@@ -55,9 +56,10 @@ def download_and_extract_papers(num_papers=5):
             # Open PDF from bytes
             pdf_document = fitz.open(stream=pdf_bytes, filetype="pdf")
             
-            # Extract text
-            text = extract_text_from_pdf(pdf_document)
-            cleaned_text = clean_pdf_text(text)
+            # Extract and clean text
+            cleaned_text = pdf2text(pdf_document)
+            if not cleaned_text:
+                raise ValueError("No extractable text found in PDF")
             
             # Limit text to first 8000 chars for API efficiency
             text_sample = cleaned_text[:8000]
@@ -97,9 +99,6 @@ def test_combined_analysis(papers):
     """
     # Initialize OpenAI client
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    
-    # Get combined prompt
-    prompt = prompt_gen_pdf_extract()
     
     analysis_results = []
     
@@ -186,6 +185,7 @@ def save_results(analysis_results):
                 'year': metadata.get('year', 'Unknown'),
                 'authors': metadata.get('authors', 'Unknown'),
                 'relevance': metadata.get('relevance', 'Unknown'),
+                'summary': metadata.get('summary', ''),
             })
         else:
             metadata_summary.append({
@@ -194,10 +194,11 @@ def save_results(analysis_results):
                 'year': 'N/A',
                 'authors': 'N/A',
                 'relevance': 'N/A',
+                'summary': '',
             })
     
     df_metadata = pd.DataFrame(metadata_summary)
-    metadata_path = "output/combined_metadata_summary.csv"
+    metadata_path = "output/paper_to_metadata.csv"
     df_metadata.to_csv(metadata_path, index=False)
     print(f"✓ Metadata summary saved to {metadata_path}")
     print("\nMetadata Summary:")
@@ -218,6 +219,7 @@ def save_results(analysis_results):
                         'ccas_status': system.get('ccas_status', 'Unknown'),
                         'assignment_mechanism': system.get('assignment_mechanism', 'Unknown'),
                         'adoption_year': system.get('adoption_year', 'Unknown'),
+                        'notes': system.get('notes', ''),
                     })
             else:
                 ccas_summary.append({
@@ -228,6 +230,7 @@ def save_results(analysis_results):
                     'ccas_status': 'N/A',
                     'assignment_mechanism': 'N/A',
                     'adoption_year': 'N/A',
+                    'notes': '',
                 })
         else:
             ccas_summary.append({
@@ -238,10 +241,11 @@ def save_results(analysis_results):
                 'ccas_status': 'N/A',
                 'assignment_mechanism': 'N/A',
                 'adoption_year': 'N/A',
+                'notes': '',
             })
     
     df_ccas = pd.DataFrame(ccas_summary)
-    ccas_path = "output/combined_ccas_summary.csv"
+    ccas_path = "output/paper_to_ccas_systems.csv"
     df_ccas.to_csv(ccas_path, index=False)
     print(f"\n✓ CCAS summary saved to {ccas_path}")
     print("\nCCAS Systems Summary:")
@@ -250,12 +254,12 @@ def save_results(analysis_results):
 
 if __name__ == "__main__":
     print("=" * 80)
-    print("Combined Paper Analysis Test - 5 Sample Papers")
+    print("Combined Paper Analysis - Full Dropbox Paper Set")
     print("=" * 80)
     
     # Step 1: Download and extract papers
-    print("\nStep 1: Downloading and extracting text from 5 sample papers...")
-    papers = download_and_extract_papers(num_papers=5)
+    print("\nStep 1: Downloading and extracting text from all papers in list...")
+    papers = download_and_extract_papers(num_papers=None)
     
     # Step 2: Run combined analysis
     print("\nStep 2: Running combined analysis (metadata + CCAS)...")
