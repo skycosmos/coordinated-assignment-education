@@ -1,46 +1,109 @@
-## Project purpose
-This repository gathers and processes data on Coordinated Choice and Assignment Systems (CCAS) for cities worldwide. The code in `deep_research` submits background deep research jobs to an OpenAI Responses model, polls for JSON outputs, and stores structured CCAS metadata in a SQLite database.
+## CCAS (Coordinated Choice and Assignment Systems)
 
-## Key files
-- `deep_research/main.py`: main runner — submits background jobs, polls results, and updates the `ccas_city` table in `ccas_city.db`.
-- `deep_research/prompt_gen.py`: builds the JSON-only prompt used by the model.
-- `deep_research/country_cities.csv`: list of target cities.
-- `deep_research/db_process.sql`: sqlite3 script to export `ccas_city` table to CSV.
-- `deep_research/requirements.txt`: Python dependencies.
-- `paper/`: helper utilities for PDF processing and OpenAI functions used for analysis.
+This repository gathers and processes data on school choice and assignment systems worldwide: city-level deep research, PDF-based paper extraction with an LLM, and a **supervised** model that predicts how much policy-relevant signal a paper is likely to yield (so you can prioritize which papers to run through expensive extraction).
 
-## Quick setup
-1. Create a `.env` file (one level up from `deep_research`) containing `OPENAI_API_KEY=your_key_here`.
-2. Install dependencies:
+### Layout
 
-```bash
-pip install -r deep_research/requirements.txt
-```
+| Path | Role |
+|------|------|
+| `ccas/db/` | Supabase clients (`get_supabase`, …) and `queries` for papers / researchers / RL edge API |
+| `ccas/cities/` | OpenAI deep-research jobs per city; SQLite + CSV under `ccas/cities/data/` |
+| `ccas/papers/` | Dropbox PDF download, text extraction, combined LLM extraction; CSV outputs under `ccas/papers/output/` |
+| `ccas/relevance/` | Performance scores from CCAS tables, Semantic Scholar abstracts, **embedding + Ridge** training; artifacts under `ccas/relevance/output/` |
+| `sql/` | Reference SQL (e.g. `rl_schema.sql` for Supabase) |
 
-3. Ensure a SQLite database `ccas_city.db` is present in `deep_research` and contains a `ccas_city` table with rows to process. Rows with empty `ccas_status` will be processed.
+Legacy import paths at the repo root (`supabase_client.py`, `rl_api_client.py`, `supabase_queries.py`) re-export the `ccas.db` modules for older scripts.
 
-## Run
-From the repository root:
+### Setup
+
+1. Create a `.env` file at the **repository root** with at least `OPENAI_API_KEY=...` and, if you use Supabase, `SUPABASE_URL`, `SUPABASE_ANON_KEY`, etc.
+
+2. Install the package in editable mode (recommended):
 
 ```bash
-cd deep_research
-python main.py
+cd /path/to/ccas
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+pip install -e .
 ```
 
-The script prints submission and polling logs and updates the `ccas_city` table with the model's JSON fields.
+Dependencies are listed in `pyproject.toml`; `requirements.txt` remains for quick `pip install -r` installs without the package.
 
-## Export results
-Use the included SQLite export script to create a CSV of the results:
+### City deep research (SQLite)
 
 ```bash
-cd deep_research
-sqlite3 ccas_city.db < db_process.sql
+python -m ccas.cities.run_city_research
 ```
 
-## Configuration & tuning
-- Adjust `MAX_RETRIES`, `POLL_INTERVAL`, and `JOB_TIMEOUT_MINUTES` in `deep_research/main.py` as needed.
-- Modify `deep_research/prompt_gen.py` to change research scope, fields, or output schema.
+Uses `ccas/cities/data/output/ccas_city.db` and inputs under `ccas/cities/data/input/`.
 
-## Notes
-- `main.py` expects the OpenAI Responses client to be configured via `OPENAI_API_KEY` in the environment.
-- Back up `ccas_city.db` before testing or bulk runs.
+### Paper extraction (Dropbox + LLM)
+
+```bash
+python -m ccas.papers.main_paper_extract
+```
+
+Expects `ccas/papers/output/paper_list.csv` and writes CSV/JSON next to it.
+
+### Fetch a PDF from `papers` (for LLM extraction)
+
+`ccas/papers/academic_pdf.py` resolves an open-access PDF URL from row fields, downloads bytes, and can extract text for your existing LLM pipeline.
+
+**Resolution order:** `pdf_url` / `open_access_pdf_url` (or similar) → Semantic Scholar (`semantic_scholar_id` or `DOI:` lookup, or title search) → optional **Unpaywall** if `UNPAYWALL_EMAIL` is set in `.env`.
+
+**Semantic Scholar:** requests use optional `SEMANTIC_SCHOLAR_API_KEY` (see [S2 API](https://www.semanticscholar.org/product/api)) to reduce `429` rate limits. Paper IDs in URLs are **URL-encoded** (fixes DOIs containing `/`).
+
+**In code:**
+
+```python
+from ccas.papers.academic_pdf import (
+    fetch_pdf_text_for_supabase_paper,
+    fetch_pdf_for_supabase_paper,
+    extract_text_from_pdf_bytes,
+)
+from ccas.papers.openai_func import read_paper
+from openai import OpenAI
+
+text, result = fetch_pdf_text_for_supabase_paper("<papers.id uuid>")
+# result.resolved_url, result.source — how the PDF was found
+client = OpenAI()
+out = read_paper(client, text, model="gpt-4o", temp=0.2)
+```
+
+**CLI:**
+
+```bash
+python -m ccas.papers.academic_pdf <papers-uuid> --dry-run   # show URL + source only
+python -m ccas.papers.academic_pdf <papers-uuid> --out /tmp/paper.pdf
+```
+
+`ccas/db/queries.py` adds `fetch_paper_by_id` for loading a single row.
+
+### Supervised relevance / performance model
+
+Ground-truth scores come from city- vs country-level CCAS rows (`performance_eval`). Training uses **OpenAI embeddings** (`text-embedding-3-small`) and **sklearn Ridge** regression on title + abstract.
+
+**Full pipeline** (scores → fetch abstracts → train):
+
+```bash
+python -m ccas.relevance.run_performance_pipeline
+```
+
+**Train only** (requires `ccas/relevance/output/paper_performance_scores.csv` and merged title/abstract data):
+
+```bash
+python -m ccas.relevance.train_performance_predictor
+```
+
+**Predict** on metadata or a CSV with `title` and `abstract`:
+
+```bash
+python -m ccas.relevance.predict_performance
+python -m ccas.relevance.predict_performance --title "..." --abstract "..."
+```
+
+Use a valid `OPENAI_API_KEY` for embedding calls.
+
+### Tuning relevance weights
+
+Edit `WEIGHT_CITY` and `WEIGHT_COUNTRY` in `ccas/relevance/performance_eval.py`, then re-run evaluation and training.
